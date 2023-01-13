@@ -1,5 +1,6 @@
 package com.application.blog.service;
 
+import java.security.Timestamp;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -19,6 +20,12 @@ public class BlogService {
     @Transactional
     public List<Blog> getAllBlogs(){
         return blogRepo.findAll(); 
+    }
+
+    @Transactional
+    public long saveBlog(Blog blog) {
+        blogRepo.save(blog); 
+        return blog.getId(); 
     }
 
 
