@@ -1,16 +1,10 @@
 package com.application.blog.entity;
 
-import java.security.Timestamp;
-import java.time.Instant;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-// import org.hibernate.annotations.CreationTimestamp;
-// import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,10 +22,8 @@ public class Blog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id; 
     private String author; 
-    // private String exerpt; 
-    // @CreationTimestamp
-    // private Timestamp createdAt; 
-    // @UpdateTimestamp
-    // private Timestamp updatedAt; 
-    // private String content; 
+    private String exerpt; 
+    private String created_at; 
+    private String updated_at; 
+    private String content; 
 }
