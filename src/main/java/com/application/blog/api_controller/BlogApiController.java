@@ -3,6 +3,7 @@ package com.application.blog.api_controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +24,6 @@ public class BlogApiController {
 
     @GetMapping("/blogs")
     public List<Blog> getBlogs(){
-        System.out.println(">> inside the getBlogs");
         System.out.println(blogService.getAllBlogs().size());
         return blogService.getAllBlogs(); 
     }
@@ -40,6 +40,16 @@ public class BlogApiController {
     public String updateBlog(@PathVariable long id, @RequestBody Blog blog){
         blog.setId(id);
         blogService.saveBlog(blog); 
-        return "Blog with id " + id + " update. ";
+        return "Blog with id " + id + " updated.";
+    }
+
+    @DeleteMapping("/blogs/{id}")
+    public String deleteBlog(@PathVariable long id){
+        boolean isBlogDeleted = blogService.deleteBlog(id); 
+        if (!isBlogDeleted){
+            return "Blog Id invalid"; 
+        }else{
+            return "Blog Deleted";
+        }
     }
 }

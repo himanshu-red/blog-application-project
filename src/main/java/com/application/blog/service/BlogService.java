@@ -1,7 +1,7 @@
 package com.application.blog.service;
 
-import java.security.Timestamp;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -28,5 +28,14 @@ public class BlogService {
         return blog.getId(); 
     }
 
-
+    @Transactional
+    public boolean deleteBlog(long id) {
+        Optional<Blog> result = blogRepo.findById(id); 
+        if (!result.isEmpty()){
+            blogRepo.delete(result.get());
+            return true; 
+        }else{
+            return false; 
+        }
+    }
 }
