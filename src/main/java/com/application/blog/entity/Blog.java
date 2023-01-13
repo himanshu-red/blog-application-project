@@ -22,8 +22,8 @@ public class Blog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id; 
     private String author; 
-    private String exerpt; 
-    private String created_at; 
-    private String updated_at; 
-    private String content; 
+    // private String exerpt; 
+    // private String created_at; 
+    // private String updated_at; 
+    // private String content; 
 }
