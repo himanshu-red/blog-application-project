@@ -30,7 +30,6 @@ public class BlogApiController {
 
     @PostMapping("/blogs")
     public String saveBlog(@RequestBody Blog blog){
-        System.out.println("");
         blog.setId(0);
         long blogId = blogService.saveBlog(blog); 
         return "blog saved with id " + blogId; 
@@ -38,7 +37,6 @@ public class BlogApiController {
 
     @PutMapping("/blogs/{id}")
     public String updateBlog(@PathVariable long id, @RequestBody Blog blog){
-        blog.setId(id);
         blogService.saveBlog(blog); 
         return "Blog with id " + id + " updated.";
     }
