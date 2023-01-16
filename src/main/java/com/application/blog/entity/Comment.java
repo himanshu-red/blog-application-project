@@ -15,6 +15,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Builder
 @Data
@@ -30,5 +31,6 @@ public class Comment {
     private String theComment; 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "blog_id")
+    @ToString.Exclude
     private Blog blog; 
 }
