@@ -1,7 +1,5 @@
 package com.application.blog.entity;
 
-import java.security.Timestamp;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;

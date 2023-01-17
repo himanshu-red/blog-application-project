@@ -35,8 +35,8 @@ public class BlogApiController {
     }
 
     @PutMapping("/blogs/{id}")
-    public String updateBlog(@PathVariable long id, @RequestBody Blog blog){
-        blogService.saveBlog(blog); 
+    public String updateBlog(@PathVariable long id, @RequestBody Blog blog) {
+        blogService.saveBlog(blog);
         return "Blog with id " + id + " updated.";
     }
 
