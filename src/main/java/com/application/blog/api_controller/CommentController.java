@@ -3,6 +3,7 @@ package com.application.blog.api_controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,9 +31,9 @@ public class CommentController {
     public String saveComment(@PathVariable(name = "blog_id") long blogId, @RequestBody Comment comment) {
         long commentId = commentService.saveComment(comment, blogId);
         if (commentId != 0) {
-            return "Comment saved with id : " + comment.getId();
+            return "Comment saved with id : " + comment.getId() + ".";
         } else {
-            return "Comment save unsuccessful";
+            return "Comment save unsuccessful.";
         }
     }
 
@@ -40,9 +41,19 @@ public class CommentController {
     public String updateComment(@PathVariable(name="comment_id") long commentId, @RequestBody Comment comment){
         boolean isUpdated = commentService.updateComment(commentId, comment);
         if (isUpdated){
-            return "Comment with id " + commentId + " is updated";
+            return "Comment with id " + commentId + " is updated.";
         }else{
-            return "Update failed"; 
+            return "Update failed."; 
+        }
+    }
+
+    @DeleteMapping("/comments/{comment_id}")
+    public String deleteComment(@PathVariable(name="comment_id") long commentId){
+        boolean isDeleted  = commentService.deleteComment(commentId); 
+        if (isDeleted){
+            return "Comment with id " + commentId + " is deleted successfully."; 
+        } else{
+            return "Deletion of comment with id " + commentId + " failed."; 
         }
     }
 }
