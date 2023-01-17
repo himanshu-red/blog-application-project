@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,13 +28,21 @@ public class CommentController {
 
     @PostMapping("/comments/{blog_id}")
     public String saveComment(@PathVariable(name = "blog_id") long blogId, @RequestBody Comment comment) {
-        System.out.println(">> printing out comment : " + comment);
         long commentId = commentService.saveComment(comment, blogId);
-        System.out.println(">> comment id returned : " + commentId);
         if (commentId != 0) {
             return "Comment saved with id : " + comment.getId();
         } else {
             return "Comment save unsuccessful";
+        }
+    }
+
+    @PutMapping("/comments/{comment_id}")
+    public String updateComment(@PathVariable(name="comment_id") long commentId, @RequestBody Comment comment){
+        boolean isUpdated = commentService.updateComment(commentId, comment);
+        if (isUpdated){
+            return "Comment with id " + commentId + " is updated";
+        }else{
+            return "Update failed"; 
         }
     }
 }

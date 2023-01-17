@@ -19,7 +19,7 @@ public class CommentService {
     @Autowired
     private BlogRepo blogRepo;
     @Autowired
-    private CommentRepo commentRepo; 
+    private CommentRepo commentRepo;
 
     @Transactional
     public List<Comment> getComments(long blogId) {
@@ -34,14 +34,27 @@ public class CommentService {
     @Transactional
     public long saveComment(Comment comment, long blogId) {
         Optional<Blog> result = blogRepo.findById(blogId);
-        if (result.isEmpty()){
-            return -1; 
-        }else{
-            Blog blog = result.get(); 
+        if (result.isEmpty()) {
+            return -1;
+        } else {
+            Blog blog = result.get();
             comment.setBlog(blog);
             System.out.println(">> before saving comment : " + comment);
-            commentRepo.save(comment); 
-            return comment.getId();   
+            commentRepo.save(comment);
+            return comment.getId();
+        }
+    }
+
+    @Transactional
+    public boolean updateComment(long commentId, Comment comment) {
+        Optional<Comment> result = commentRepo.findById(commentId);
+        if (result.isPresent()) {
+            Comment oldComment = result.get();
+            oldComment.setTheComment(comment.getTheComment());
+            commentRepo.save(oldComment);
+            return true;
+        } else {
+            return false;
         }
     }
 }
