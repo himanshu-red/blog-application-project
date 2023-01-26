@@ -12,7 +12,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -34,9 +33,9 @@ public class Comment {
     private long id; 
     private String theComment; 
     @CreationTimestamp
-    private java.sql.Timestamp created_at; 
+    private java.time.LocalDateTime created_at; 
     @UpdateTimestamp
-    private java.sql.Timestamp updated_at; 
+    private java.time.LocalDateTime updated_at; 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "blog_id")
     @ToString.Exclude
