@@ -27,6 +27,21 @@ public class CommentController {
         return commentService.getComments(blogId);
     }
 
+    @GetMapping("/comment/last_updated/{comment_id}")
+    public java.time.LocalDateTime getLastUpdatedTime(@PathVariable(name = "comment_id") long commentId) {
+        return commentService.getLastUpdatedTime(commentId);
+    }
+
+    @GetMapping("/comment/{comment_id}")
+    public String getCommentById(@PathVariable(name="comment_id") long commentId){
+        String theComment =  commentService.getCommentById(commentId); 
+        if (theComment.isEmpty()){
+            return "Comment not retrieved"; 
+        }else{
+            return theComment; 
+        }
+    }
+
     @PostMapping("/comments/{blog_id}")
     public String saveComment(@PathVariable(name = "blog_id") long blogId, @RequestBody Comment comment) {
         long commentId = commentService.saveComment(comment, blogId);

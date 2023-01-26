@@ -58,6 +58,7 @@ public class CommentService {
         }
     }
 
+    @Transactional
     public boolean deleteComment(long commentId) {
         Optional<Comment> result = commentRepo.findById(commentId);
         if (result.isPresent()) {
@@ -67,5 +68,15 @@ public class CommentService {
         } else {
             return false;
         }
+    }
+
+    @Transactional
+    public java.time.LocalDateTime getLastUpdatedTime(long commentId){
+        return commentRepo.getLastUpdatedTime(commentId); 
+    }
+
+    @Transactional
+    public String getCommentById(long commentId){
+        return commentRepo.getCommentById(commentId);
     }
 }
