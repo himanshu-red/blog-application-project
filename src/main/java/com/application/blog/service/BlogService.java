@@ -15,27 +15,37 @@ import com.application.blog.repository.BlogRepo;
 public class BlogService {
 
     @Autowired
-    private BlogRepo blogRepo; 
-    
+    private BlogRepo blogRepo;
+
     @Transactional
-    public List<Blog> getAllBlogs(){
-        return blogRepo.findAll(); 
+    public List<Blog> getAllBlogs() {
+        return blogRepo.findAll();
+    }
+
+    @Transactional
+    public Blog getBlogById(long id){
+        Optional<Blog> result = blogRepo.findById(id);
+        if (result.isPresent()){
+            return result.get();
+        }else{
+            return null;
+        }
     }
 
     @Transactional
     public long saveBlog(Blog blog) {
-        blogRepo.save(blog); 
-        return blog.getId(); 
+        blogRepo.save(blog);
+        return blog.getId();
     }
 
     @Transactional
     public boolean deleteBlog(long id) {
-        Optional<Blog> result = blogRepo.findById(id); 
-        if (!result.isEmpty()){
+        Optional<Blog> result = blogRepo.findById(id);
+        if (result.isPresent()) {
             blogRepo.delete(result.get());
-            return true; 
-        }else{
-            return false; 
+            return true;
+        } else {
+            return false;
         }
     }
 }

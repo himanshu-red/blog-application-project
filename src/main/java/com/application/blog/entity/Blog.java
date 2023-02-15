@@ -2,15 +2,9 @@ package com.application.blog.entity;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,12 +19,18 @@ import lombok.NoArgsConstructor;
 public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id; 
-    private String author; 
+    private long id;
+    private String author;
     // private String exerpt; 
     // private String created_at; 
     // private String updated_at; 
     // private String content; 
-    @OneToMany(fetch = FetchType.LAZY,  mappedBy = "blog", cascade = {CascadeType.ALL})
-    private List<Comment> comments; 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "blog", cascade = {CascadeType.ALL})
+    private List<Comment> comments;
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(name = "blog_tag",
+            joinColumns = @JoinColumn(name = "blog_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    private List<Tag> tags;
 }

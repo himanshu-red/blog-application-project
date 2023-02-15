@@ -30,8 +30,9 @@ public class BlogApiController {
 
     @PostMapping("/blogs")
     public String saveBlog(@RequestBody Blog blog){
-        long blogId = blogService.saveBlog(blog); 
-        return "blog saved with id " + blogId; 
+        return blog.toString(); 
+        // long blogId = blogService.saveBlog(blog); 
+        // return "blog saved with id " + blogId; 
     }
 
     @PutMapping("/blogs/{id}")
