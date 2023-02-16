@@ -16,32 +16,22 @@ import java.util.List;
 public class TagService {
     @Autowired
     TagRepo tagRepo;
-    @Autowired
-    BlogService blogService;
 
-//    @Transactional
-//    public long saveTag(String tags, long blog_id){
-//        List<String> tagsList = separateTags(tags);
-//        Blog blog  = blogService.getBlogById(blog_id);
-//        blog.getTags().add(tag);
-//        blogService.saveBlog(blog);
-//        return tag.getId();
-//    }
+    @Transactional
+    public List<Tag> saveTags(List<String> tagsList) {
+        List<Tag> tagObjects = new ArrayList<>();
+        for (String tagName: tagsList){
+            Tag tag = new Tag();
+            List<Tag> savedTags = tagRepo.findByName(tagName);
+            if (savedTags.isEmpty()) {
+                tag.setName(tagName);
+                tagRepo.save(tag);
+            }else{
+                tag = savedTags.get(0);
+            }
+            tagObjects.add(tag);
+        }
+        return tagObjects;
+    }
 
-//    private List<String> separateTags(String tags) {
-//        tags = tags.trim();
-//        List<String> tagsList = new ArrayList<>();
-//        String separatedTag = "";
-//        for (int i = 0; i < tags.length(); i++){
-//            if ((tags.charAt(i) == " ") || (tags.charAt(i) != ",")){
-//
-//            }
-//        }
-//
-//    }
-
-//    @Transactional
-//    public List<Tag> getTagsOfA_BlogId(long blogId){
-//
-//    }
 }
