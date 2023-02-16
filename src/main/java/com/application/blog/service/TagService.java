@@ -7,21 +7,38 @@ import com.application.blog.repository.TagRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class TagService {
     @Autowired
     TagRepo tagRepo;
     @Autowired
-    blogService blogService;
+    BlogService blogService;
 
-    @Transactional
-    public long saveTag(Tag tag, long blog_id){
-        Blog blog  = blogService.get
-        tagRepo.save(tag);
-        return tag.getId();
-    }
+//    @Transactional
+//    public long saveTag(String tags, long blog_id){
+//        List<String> tagsList = separateTags(tags);
+//        Blog blog  = blogService.getBlogById(blog_id);
+//        blog.getTags().add(tag);
+//        blogService.saveBlog(blog);
+//        return tag.getId();
+//    }
+
+//    private List<String> separateTags(String tags) {
+//        tags = tags.trim();
+//        List<String> tagsList = new ArrayList<>();
+//        String separatedTag = "";
+//        for (int i = 0; i < tags.length(); i++){
+//            if ((tags.charAt(i) == " ") || (tags.charAt(i) != ",")){
+//
+//            }
+//        }
+//
+//    }
 
 //    @Transactional
 //    public List<Tag> getTagsOfA_BlogId(long blogId){

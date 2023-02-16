@@ -16,8 +16,9 @@ public class TagApiController {
     TagService tagService;
 
     @GetMapping("/tags/{blog_id}")
-    public String saveTag(@RequestBody Tag tag, @PathVariable long blog_id){
-        tagService.saveTag(tag, blog_id);
+    public String saveTag(@RequestBody Tag tag, @PathVariable long blog_id) {
+//        tagService.saveTag(tag, blog_id);
+        return "saved";
     }
 
 

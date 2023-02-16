@@ -3,8 +3,7 @@ package com.application.blog.service;
 import java.util.List;
 import java.util.Optional;
 
-import javax.transaction.Transactional;
-
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,24 +23,24 @@ public class CommentService {
     @Transactional
     public List<Comment> getComments(long blogId) {
         Optional<Blog> result = blogRepo.findById(blogId);
-        if (result.isEmpty()) {
-            return null;
-        } else {
+        if (result.isPresent()) {
             return result.get().getComments();
+        }else{
+            return null;
         }
     }
 
     @Transactional
     public long saveComment(Comment comment, long blogId) {
         Optional<Blog> result = blogRepo.findById(blogId);
-        if (result.isEmpty()) {
-            return -1;
-        } else {
+        if (result.isPresent()) {
             Blog blog = result.get();
             comment.setBlog(blog);
             System.out.println(">> before saving comment : " + comment);
             commentRepo.save(comment);
             return comment.getId();
+        }else{
+            return -1;
         }
     }
 

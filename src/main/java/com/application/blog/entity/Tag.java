@@ -1,8 +1,8 @@
 package com.application.blog.entity;
 
-import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
