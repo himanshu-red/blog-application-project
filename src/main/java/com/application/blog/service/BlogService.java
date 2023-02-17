@@ -38,13 +38,14 @@ public class BlogService {
 
     @Transactional
     public long saveBlog(Blog blog) {
-        List<String> tagsList = tagService.separateTags(blog.getTags());
-        for (String tag : tagsList) {
-            System.out.println(tag);
+        String tags = blog.getTags();
+//        System.out.println("Tags : " + tags);
+        if (!tags.isEmpty()) {
+            List<String> tagsList = tagService.separateTags(tags);
+            List<Tag> tagObjects = tagService.saveTags(tagsList);
+            blog.setTagsList(tagObjects);
+            blog.setTags("");
         }
-        blog.setTags("");
-        List<Tag> tagObjects = tagService.saveTags(tagsList);
-        blog.setTagsList(tagObjects);
         blogRepo.save(blog);
         return blog.getId();
     }
@@ -54,7 +55,10 @@ public class BlogService {
     public boolean deleteBlog(long id) {
         Optional<Blog> result = blogRepo.findById(id);
         if (result.isPresent()) {
-            blogRepo.delete(result.get());
+            Blog blog = result.get();
+            List<Tag> tagsList = blog.getTagsList();
+            blogRepo.delete(blog);
+            tagService.deleteTagIfWithoutBlogs(tagsList);
             return true;
         } else {
             return false;

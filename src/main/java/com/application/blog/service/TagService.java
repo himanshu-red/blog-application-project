@@ -50,4 +50,17 @@ public class TagService {
         return tagObjects;
     }
 
+    public void deleteTagIfWithoutBlogs(List<Tag> tagsList) {
+        for (Tag tag : tagsList){
+            System.out.println("Tag name : " + tag.getName());
+            System.out.println("Blog Id : " + tag.getBlogs().size());
+            if (tag.getBlogs().isEmpty()){
+                deleteTag(tag);
+            }
+        }
+    }
+    @Transactional
+    private void deleteTag(Tag tag) {
+        tagRepo.delete(tag);
+    }
 }
