@@ -31,6 +31,7 @@ public class Blog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String author;
+    @JsonIgnore
     private String tags;
     // private String exerpt; 
     // private String created_at; 
@@ -38,7 +39,6 @@ public class Blog {
     // private String content; 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "blog", cascade = {CascadeType.ALL})
     private List<Comment> comments;
-    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "blog_tag",
             joinColumns = @JoinColumn(name = "blog_id"),

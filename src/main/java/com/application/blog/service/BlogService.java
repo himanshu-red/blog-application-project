@@ -38,7 +38,7 @@ public class BlogService {
 
     @Transactional
     public long saveBlog(Blog blog) {
-        List<String> tagsList = separateTags(blog.getTags());
+        List<String> tagsList = tagService.separateTags(blog.getTags());
         for (String tag : tagsList) {
             System.out.println(tag);
         }
@@ -49,21 +49,6 @@ public class BlogService {
         return blog.getId();
     }
 
-    private List<String> separateTags(String tags) {
-        tags = tags.trim();
-        List<String> tagsList = new ArrayList<>();
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < tags.length(); i++) {
-            if (tags.charAt(i) != ' ' && tags.charAt(i) !=  ',') {
-                stringBuilder.append(tags.charAt(i));
-            }
-            if ((tags.charAt(i) == ' ' || tags.charAt(i) == ',' || i == tags.length() - 1) && !stringBuilder.isEmpty()) {
-                tagsList.add(stringBuilder.toString());
-                stringBuilder.delete(0, stringBuilder.length());
-            }
-        }
-        return tagsList;
-    }
 
     @Transactional
     public boolean deleteBlog(long id) {

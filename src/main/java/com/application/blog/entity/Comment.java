@@ -26,7 +26,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="comment")
-@JsonIgnoreProperties({ "blog" })
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,5 +38,6 @@ public class Comment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "blog_id")
     @ToString.Exclude
+    @JsonIgnore
     private Blog blog; 
 }

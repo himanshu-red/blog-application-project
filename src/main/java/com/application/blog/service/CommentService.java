@@ -36,7 +36,6 @@ public class CommentService {
         if (result.isPresent()) {
             Blog blog = result.get();
             comment.setBlog(blog);
-            System.out.println(">> before saving comment : " + comment);
             commentRepo.save(comment);
             return comment.getId();
         }else{
