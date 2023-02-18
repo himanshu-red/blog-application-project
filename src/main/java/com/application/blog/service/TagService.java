@@ -19,7 +19,7 @@ public class TagService {
     TagRepo tagRepo;
 
     protected List<String> separateTags(String tags) {
-        tags = tags.trim();
+        tags = tags.trim().toLowerCase();
         List<String> tagsList = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < tags.length(); i++) {
