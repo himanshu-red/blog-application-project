@@ -16,13 +16,9 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
-@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,20 +26,30 @@ import lombok.NoArgsConstructor;
 public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter
     private long id;
+    @Getter
+    @Setter
     private String author;
+    @Getter
+    @Setter
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String tags;
     // private String exerpt; 
     // private String created_at; 
     // private String updated_at; 
-    // private String content; 
+    // private String content;
+    @Getter
+    @Setter
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "blog", cascade = {CascadeType.ALL})
     private List<Comment> comments;
     @ManyToMany
     @JoinTable(name = "blog_tag",
             joinColumns = @JoinColumn(name = "blog_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    @Getter
+    @Setter
     private List<Tag> tagsList;
 
 }

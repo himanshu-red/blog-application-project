@@ -58,7 +58,7 @@ public class BlogService {
             Blog blog = result.get();
             List<Tag> tagsList = blog.getTagsList();
             blogRepo.delete(blog);
-            tagService.deleteTagIfWithoutBlogs(tagsList);
+             tagService.deleteTagIfWithoutBlogs(tagsList);
             return true;
         } else {
             return false;
