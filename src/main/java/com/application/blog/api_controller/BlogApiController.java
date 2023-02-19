@@ -17,7 +17,6 @@ public class BlogApiController {
 
     @GetMapping("/blogs")
     public List<Blog> getBlogs() {
-        System.out.println(blogService.getAllBlogs().size());
         return blogService.getAllBlogs();
     }
 

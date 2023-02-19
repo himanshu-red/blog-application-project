@@ -23,7 +23,11 @@ public class BlogService {
 
     @Transactional
     public List<Blog> getAllBlogs() {
-        return blogRepo.findAll();
+        List<Blog> blogsList =  blogRepo.findAll();
+        for (Blog blog : blogsList){
+            System.out.println(blog);
+        }
+        return blogsList;
     }
 
     @Transactional

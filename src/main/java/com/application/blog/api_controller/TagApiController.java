@@ -3,23 +3,18 @@ package com.application.blog.api_controller;
 import com.application.blog.entity.Tag;
 import com.application.blog.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+@RestController
 @RequestMapping("/application")
 public class TagApiController {
     @Autowired
     TagService tagService;
 
-    @GetMapping("/tags/{blog_id}")
-    public String saveTag(@RequestBody Tag tag, @PathVariable long blog_id) {
-//        tagService.saveTag(tag, blog_id);
-        return "saved";
+    @GetMapping("/tag/{blog_id}")
+    public List<Tag> getTagsOfA_Blog(@PathVariable long blog_id){
+        return tagService.getTagsOfA_Blog(blog_id);
     }
-
-
 }

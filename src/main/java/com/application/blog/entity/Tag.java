@@ -9,6 +9,8 @@ import java.util.List;
 
 @Entity
 @Builder
+@ToString
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tag")
@@ -16,11 +18,7 @@ public class Tag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Setter
     private long id;
-    @Getter
-    @Setter
     private String name;
     // private String createdAt;
     @JsonIgnore
@@ -28,7 +26,6 @@ public class Tag {
     @JoinTable(name = "blog_tag",
             joinColumns = @JoinColumn(name = "tag_id"),
             inverseJoinColumns = @JoinColumn(name = "blog_id"))
-    @Getter
-    @Setter
+    @ToString.Exclude
     private List<Blog> blogs;
 }

@@ -12,6 +12,7 @@ import jakarta.transaction.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TagService {
@@ -62,5 +63,20 @@ public class TagService {
     @Transactional
     private void deleteTag(Tag tag) {
         tagRepo.delete(tag);
+    }
+
+    @Transactional
+    public List<Tag> getTagsOfA_Blog(long blogId) {
+        System.out.println("Blog id : " + blogId);
+        List<Tag> tagsList = tagRepo.getTagsOfA_Blog(blogId);
+        if (tagsList.isEmpty()){
+            System.out.println("Tag list is empty");
+            return null;
+        }else{
+            for (Tag tag : tagsList){
+                System.out.println(tag);
+            }
+            return tagsList;
+        }
     }
 }
