@@ -23,11 +23,7 @@ public class BlogService {
 
     @Transactional
     public List<Blog> getAllBlogs() {
-        List<Blog> blogsList =  blogRepo.findAll();
-        for (Blog blog : blogsList){
-            System.out.println(blog);
-        }
-        return blogsList;
+        return blogRepo.findAll();
     }
 
     @Transactional
@@ -43,7 +39,6 @@ public class BlogService {
     @Transactional
     public long saveBlog(Blog blog) {
         String tags = blog.getTags();
-//        System.out.println("Tags : " + tags);
         if (!tags.isEmpty()) {
             List<String> tagsList = tagService.separateTags(tags);
             List<Tag> tagObjects = tagService.saveTags(tagsList);

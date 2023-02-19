@@ -67,16 +67,6 @@ public class TagService {
 
     @Transactional
     public List<Tag> getTagsOfA_Blog(long blogId) {
-        System.out.println("Blog id : " + blogId);
-        List<Tag> tagsList = tagRepo.getTagsOfA_Blog(blogId);
-        if (tagsList.isEmpty()){
-            System.out.println("Tag list is empty");
-            return null;
-        }else{
-            for (Tag tag : tagsList){
-                System.out.println(tag);
-            }
-            return tagsList;
-        }
+        return tagRepo.getTagsOfA_Blog(blogId);
     }
 }
