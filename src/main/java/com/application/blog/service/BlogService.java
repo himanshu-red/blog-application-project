@@ -41,9 +41,8 @@ public class BlogService {
     }
 
     @Transactional
-    public long saveBlog(Blog blog) {
-        String tags = blog.getTags();
-//        System.out.println("Tags : " + tags);
+    public long saveBlog(Blog blog, String tags) {
+        System.out.println("Tags : " + tags);
         if (!tags.isEmpty()) {
             List<String> tagsList = tagService.separateTags(tags);
             List<Tag> tagObjects = tagService.saveTags(tagsList);
@@ -65,6 +64,18 @@ public class BlogService {
              tagService.deleteTagIfWithoutBlogs(tagsList);
             return true;
         } else {
+            return false;
+        }
+    }
+
+    public boolean updateBlog(long id, Blog blog) {
+        Optional<Blog> result = blogRepo.findById(id);
+        if(result.isPresent()){
+            Blog oldBlog = result.get();
+            oldBlog.setAuthor(blog.getAuthor());
+            blogRepo.save(oldBlog);
+            return true;
+        }else{
             return false;
         }
     }

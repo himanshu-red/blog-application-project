@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import com.application.blog.entity.Blog;
 import com.application.blog.service.BlogService;
 
+
 @RestController
 @RequestMapping("/application")
 public class BlogApiController {
@@ -21,15 +22,19 @@ public class BlogApiController {
     }
 
     @PostMapping("/blogs")
-    public String saveBlog(@RequestBody Blog blog) {
-        long blogId = blogService.saveBlog(blog);
+    public String saveBlog( @RequestBody Blog blog, @RequestParam("tags") String tags) {
+        long blogId = blogService.saveBlog(blog, tags);
         return "blog saved with id " + blogId;
     }
 
     @PutMapping("/blogs/{id}")
     public String updateBlog(@PathVariable long id, @RequestBody Blog blog) {
-        blogService.saveBlog(blog);
-        return "Blog with id " + id + " updated.";
+        boolean isUpdated = blogService.updateBlog(id, blog);
+        if (isUpdated){
+            return "Blog updated successfully.";
+        } else {
+            return "Blog update Unsuccessful";
+        }
     }
 
     @DeleteMapping("/blogs/{id}")
